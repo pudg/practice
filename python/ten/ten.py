@@ -46,3 +46,20 @@ def two_sum(nums, target):
             if locations[delta][0] != idx:
                 return [idx, locations[delta][0]]
     return []
+
+
+# Problem: Return a list of grouped anagrams.
+# Approach:
+#   -Create a map: string -> [string]
+#   -Sort the strings
+#   -Check if sorted string exists in map
+def group_anagrams(words):
+    anagrams = dict()
+    for w in words:
+        sw = sorted(list(w))
+        sw = "".join([c for c in sw])
+        if sw in anagrams:
+            anagrams[sw].append(w)
+        else:
+            anagrams[sw] = [w]
+    return anagrams.values()

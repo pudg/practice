@@ -71,3 +71,37 @@ func TwoSum(nums []int, target int) []int {
 	}
 	return []int{}
 }
+
+// Problem: Return a list of grouped anagrams.
+// Approach:
+//
+//	-Create a map: string -> [string]
+//	-Sort the strings
+//	-Check if sorted string exists in map
+func values(anagrams map[string][]string) [][]string {
+	vals := make([][]string, 0)
+	for key := range anagrams {
+		vals = append(vals, anagrams[key])
+	}
+	return vals
+}
+func splitAndSort(word string) string {
+	chars := make([]string, 0)
+	for _, char := range word {
+		chars = append(chars, string(char))
+	}
+	sort.Strings(chars)
+	return strings.Join(chars, "")
+}
+func GroupAnagrams(words []string) [][]string {
+	anagrams := make(map[string][]string)
+	for _, w := range words {
+		sw := splitAndSort(w)
+		if _, exists := anagrams[sw]; exists {
+			anagrams[sw] = append(anagrams[sw], w)
+		} else {
+			anagrams[sw] = []string{w}
+		}
+	}
+	return values(anagrams)
+}

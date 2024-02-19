@@ -61,3 +61,23 @@ export const twoSum = (nums, target) => {
     }
     return [];
 }
+
+// Problem: Return a list of grouped anagrams.
+// Approach:
+//   -Create a map: string -> [string]
+//   -Sort the strings
+//   -Check if sorted string exists in map
+export const groupAnagrams = (words) => {
+    const anagrams = {};
+    for (const w of words) {
+        let sw = w.split("");
+        sw.sort()
+        sw = sw.join("");
+        if (sw in anagrams) {
+            anagrams[sw].push(w);
+        } else {
+            anagrams[sw] = [w];
+        }
+    }
+    return Object.values(anagrams);
+}

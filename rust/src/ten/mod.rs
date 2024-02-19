@@ -63,3 +63,24 @@ pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<usize> {
     }
     vec![]
 }
+
+// Problem: Return a list of grouped anagrams.
+// Approach:
+//   -Create a map: string -> [string]
+//   -Sort the strings
+//   -Check if sorted string exists in map
+pub fn group_anagrams(words: Vec<String>) -> Vec<Vec<String>> {
+    let mut anagrams: HashMap<String, Vec<String>> = HashMap::new();
+
+    for i in 0..words.len() {
+        let mut w: Vec<char> = words[i].chars().collect();
+        w.sort();
+        let w: String = w.into_iter().collect();
+        anagrams
+        .entry(w)
+        .or_insert(Vec::new())
+        .push(words[i].clone());
+    }
+
+    anagrams.values().cloned().collect()
+}
