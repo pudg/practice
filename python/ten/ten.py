@@ -25,3 +25,24 @@ def valid_anagram(one, two):
     two_sorted = "".join([i for i in two])
     print(one_sorted, two_sorted)
     return one_sorted == two_sorted
+
+# Problem: Return indices of two numbers that sum to target
+# Approach:
+#   -Create a mapping of numbers to locations
+#   -Iterate over numbers, and calculate delta
+#   -Check if delta exists within map
+def two_sum(nums, target):
+    locations = dict()
+    for idx, num in enumerate(nums):
+        if num not in locations:
+            locations[num] = [idx]
+        else:
+            locations[num].append(idx)
+    for idx, num in enumerate(nums):
+        delta = target - num
+        if delta in locations:
+            if len(locations[delta]) >= 2:
+                return [idx, locations[delta][1]]
+            if locations[delta][0] != idx:
+                return [idx, locations[delta][0]]
+    return []

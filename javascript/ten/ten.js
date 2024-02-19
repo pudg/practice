@@ -29,3 +29,35 @@ export const validAnagram = (one, two) => {
 
     return one_loc.join("") == two_loc.join("");
 }
+
+// Problem: Return indices of two numbers that sum to target
+// Approach:
+//   -Create a mapping of numbers to locations
+//   -Iterate over numbers, and calculate delta
+//   -Check if delta exists within map
+export const twoSum = (nums, target) => {
+    const locations = new Map();
+    for (const idx in nums) {
+        if (locations.has(nums[idx])) {
+            const locs = locations.get(nums[idx]);
+            locs.push(idx);
+            locations.set(nums[idx], locs);
+        } else {
+            locations.set(nums[idx], [idx]);
+        }
+    }
+
+    for (const idx in nums) {
+        const delta = target - nums[idx];
+        if (locations.has(delta)) {
+            const locs = locations.get(delta);
+            if (locs.length >= 2) {
+                return [idx, locs[1]];
+            }
+            if (locs[0] != idx) {
+                return [idx, locs[0]];
+            }
+        }
+    }
+    return [];
+}

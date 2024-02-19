@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::{collections::{HashMap, HashSet}, vec};
 
 // Problem: Check if the given slice contains duplicates.
 // Approach:
@@ -32,4 +32,34 @@ pub fn valid_anagrams(one: &str, two: &str) -> bool {
     let one_sorted: String = one_chars.into_iter().collect();
     let two_sorted: String = two_chars.into_iter().collect();
     one_sorted == two_sorted
+}
+
+// Problem: Return indices of two numbers that sum to target
+// Approach:
+//
+//	-Create a mapping of numbers to locations
+//	-Iterate over numbers, and calculate delta
+//	-Check if delta exists within map
+pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<usize> {
+    let mut locations: HashMap<i32, Vec<usize>> = HashMap::new();
+    for i in 0..nums.len() {
+        locations
+        .entry(nums[i])
+        .or_insert(Vec::new())
+        .push(i)
+    }
+
+    for i in 0..nums.len() {
+        let delta = target - nums[i];
+        if locations.contains_key(&delta) {
+            let locs = locations.get(&delta).unwrap();
+            if locs.len() >= 2 {
+                return vec![i, locs[1]];
+            }
+            if locs[0] != i {
+                return vec![i, locs[0]];
+            }
+        }
+    }
+    vec![]
 }
