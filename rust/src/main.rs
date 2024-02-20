@@ -9,5 +9,6 @@ fn main() {
         "tan".to_string(),
         "ate".to_string(),
         "nat".to_string(),
-        "bat".to_string()]))
+        "bat".to_string()]));
+    println!("{:?}", ten::top_k_frequencies(vec![1, 1, 1, 2, 2, 2, 3], 1));
 }

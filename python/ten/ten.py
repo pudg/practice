@@ -63,3 +63,18 @@ def group_anagrams(words):
         else:
             anagrams[sw] = [w]
     return anagrams.values()
+
+# Problem: Return the 'k' most frequent elements.
+# Approach:
+#   -Use a map to create frequencies count
+#   -Get the map K:V pairs
+#   -Sort pairs by value
+def top_k_frequencies(nums, k):
+    from collections import defaultdict
+    frequencies = defaultdict(int)
+    for num in nums:
+        frequencies[num] += 1
+    pairs = sorted(frequencies.items(), reverse=True, key=lambda x : x[1])
+    return [pairs[i][0] for i in range(k)]
+
+    

@@ -1,6 +1,5 @@
 // Problem: Check if the given slice contains duplicates.
 // Approach:
-//
 //	-Iterate over the slice of ints
 //	-Use a map to memorize previously seen integers
 //	-Check if current integer is in memory
@@ -80,4 +79,21 @@ export const groupAnagrams = (words) => {
         }
     }
     return Object.values(anagrams);
+}
+
+// Problem: Return the 'k' most frequent elements.
+// Approach:
+//   -Use a map to create frequencies count
+//   -Get the map K:V pairs
+//   -Sort pairs by value
+export const topKFrequencies = (nums, k) => {
+    const frequencies = new Map();
+    for (const num of nums) {
+        frequencies.has(num) 
+        ? frequencies.set(num, frequencies.get(num) + 1) 
+        : frequencies.set(num, 1)
+    }
+    //convert map_entries to array, and sort in descending order
+    let entries = [...frequencies.entries()].sort((a, b) => b[1] - a[1]);
+    return entries.slice(0, k).map(entry => entry[0]);
 }

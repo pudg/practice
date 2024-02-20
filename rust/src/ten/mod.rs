@@ -1,4 +1,4 @@
-use std::{collections::{HashMap, HashSet}, vec};
+use std::{collections::{HashMap, HashSet}, i32, vec};
 
 // Problem: Check if the given slice contains duplicates.
 // Approach:
@@ -83,4 +83,29 @@ pub fn group_anagrams(words: Vec<String>) -> Vec<Vec<String>> {
     }
 
     anagrams.values().cloned().collect()
+}
+
+// Problem: Return the 'k' most frequent elements.
+// Approach:
+//   -Use a map to create frequencies count
+//   -Get the map K:V pairs
+//   -Sort pairs by value
+pub fn top_k_frequencies(nums: Vec<i32>, k: i32) -> Vec<i32> {
+    let mut frequencies: HashMap<i32, i32> = HashMap::new();
+    for i in 0..nums.len() {
+        frequencies
+            .entry(nums[i])
+            .and_modify(|v| *v += 1)
+            .or_insert(1);
+    }
+
+    let mut pairs: Vec<(i32, i32)> = frequencies.into_iter().collect();
+    pairs.sort_by(|a, b| b.1.cmp(&a.1));
+
+    let mut result: Vec<i32> = Vec::new();
+    for i in 0..k {
+        result.push(pairs[i as usize].0)
+
+    }
+    result
 }

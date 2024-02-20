@@ -57,7 +57,7 @@ func TwoSum(nums []int, target int) []int {
 			locations[num] = []int{idx}
 		}
 	}
-	fmt.Println("{}", locations)
+
 	for idx, num := range nums {
 		delta := target - num
 		if locs, exists := locations[delta]; exists {
@@ -104,4 +104,26 @@ func GroupAnagrams(words []string) [][]string {
 		}
 	}
 	return values(anagrams)
+}
+
+// Problem: Return the 'k' most frequent elements.
+// Approach:
+//
+//	-Use a map to create frequencies count
+//	-Get the map K:V pairs
+//	-Sort pairs by value
+func TopKFrequencies(nums []int, k int) []int {
+	frequencies := make(map[int]int)
+	for _, num := range nums {
+		frequencies[num] += 1
+	}
+	entries := make([][]int, 0, len(frequencies))
+	for key, val := range frequencies {
+		entries = append(entries, []int{key, val})
+	}
+	sort.Slice(entries, func(i, j int) bool {
+		return entries[j][1] < entries[i][1]
+	})
+	fmt.Println(entries)
+	return []int{}
 }
