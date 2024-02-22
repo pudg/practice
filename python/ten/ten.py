@@ -77,4 +77,20 @@ def top_k_frequencies(nums, k):
     pairs = sorted(frequencies.items(), reverse=True, key=lambda x : x[1])
     return [pairs[i][0] for i in range(k)]
 
-    
+
+# Problem: Return true if the given string is a palindrome.
+# Approach:
+#   -Remove all non-alphanumeric characters
+#   -Use two pointers to work inwards
+def valid_palindrome(s):
+    import re
+    regex = re.compile(r'[a-zA-Z]+')
+    matches = regex.findall(s)
+    result = "".join(matches).lower()
+    lhs, rhs = 0, len(result) - 1
+    while lhs != rhs:
+        if result[lhs] != result[rhs]:
+            return False
+        lhs += 1
+        rhs -= 1
+    return True

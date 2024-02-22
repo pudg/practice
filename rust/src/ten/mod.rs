@@ -1,4 +1,4 @@
-use std::{collections::{HashMap, HashSet}, i32, vec};
+use std::{collections::{HashMap, HashSet}, i32, iter::zip, vec};
 
 // Problem: Check if the given slice contains duplicates.
 // Approach:
@@ -108,4 +108,21 @@ pub fn top_k_frequencies(nums: Vec<i32>, k: i32) -> Vec<i32> {
 
     }
     result
+}
+
+// Problem: Return true if the given string is a palindrome.
+// Approach:
+//   -Remove all non-alphanumeric characters
+//   -Use two pointers to work inwards
+use regex::Regex;
+pub fn valid_palindrome(s: String) -> bool {
+    let regex = Regex::new(r"[^a-zA-Z]").unwrap();
+    let result = regex.replace_all(&s, "").to_lowercase();
+    let pairs = zip(result.chars(), result.chars().rev());
+    for pair in pairs {
+        if pair.0 != pair.1 {
+            return false
+        }
+    }
+    true
 }

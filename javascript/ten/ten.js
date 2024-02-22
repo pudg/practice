@@ -97,3 +97,22 @@ export const topKFrequencies = (nums, k) => {
     let entries = [...frequencies.entries()].sort((a, b) => b[1] - a[1]);
     return entries.slice(0, k).map(entry => entry[0]);
 }
+
+// Problem: Return true if the given string is a palindrome.
+// Approach:
+//   -Remove all non-alphanumeric characters
+//   -Use two pointers to work inwards
+export const validPalindrome = (s) => {
+    let result = s.replace(/[^a-zA-Z]/g, "");
+    result = result.toLowerCase();
+    let lhs = 0;
+    let rhs = result.length - 1;
+    while (lhs != rhs) {
+        if (result[lhs] !== result[rhs]) {
+            return false;
+        }
+        lhs += 1;
+        rhs -= 1;
+    }
+    return true;
+}

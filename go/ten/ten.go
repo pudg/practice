@@ -2,6 +2,7 @@ package ten
 
 import (
 	"fmt"
+	"regexp"
 	"sort"
 	"strings"
 )
@@ -126,4 +127,25 @@ func TopKFrequencies(nums []int, k int) []int {
 	})
 	fmt.Println(entries)
 	return []int{}
+}
+
+// Problem: Return true if the given string is a palindrome.
+// Approach:
+//
+//	-Remove all non-alphanumeric characters
+//	-Use two pointers to work inwards
+func ValidPalindrome(s string) bool {
+	reg := regexp.MustCompile("[^a-zA-Z0-9]+")
+	result := reg.ReplaceAllString(s, "")
+	chars := []rune(strings.ToLower(result))
+	lhs := 0
+	rhs := len(chars) - 1
+	for lhs != rhs {
+		if string(chars[lhs]) != string(chars[rhs]) {
+			return false
+		}
+		lhs += 1
+		rhs -= 1
+	}
+	return true
 }

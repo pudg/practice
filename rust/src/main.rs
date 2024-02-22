@@ -11,4 +11,6 @@ fn main() {
         "nat".to_string(),
         "bat".to_string()]));
     println!("{:?}", ten::top_k_frequencies(vec![1, 1, 1, 2, 2, 2, 3], 1));
+    println!("{}", ten::valid_palindrome("race a car".to_string()));
+    println!("{}", ten::valid_palindrome("A man, a plan, a canal: Panama".to_string()));
 }
